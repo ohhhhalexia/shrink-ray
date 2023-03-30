@@ -1,3 +1,6 @@
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { User } from './User';
+
 @Entity()
 export class Link {
     @PrimaryGeneratedColumn()
@@ -11,4 +14,7 @@ export class Link {
 
     @Column({ default: 0 })
     numHits: number;
+
+    @ManyToOne(() => User, (user) => user.links, { cascade: ['insert', 'update'] })
+    user: Relation<User>;
 }
